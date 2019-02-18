@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <title>Tip Calculator!</title>
+  </head>
+  <body>
+        <div class="container">
+            <div class="col-md-12">
+                <br>
+                <h2>TIP CALCULATOR</h2>
+                <hr>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">How much was your bill?</label>
+                        <input type="number" min="0" class="form-control" id="bill_amount" aria-describedby="emailHelp" placeholder="enter bill amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">How was your service?</label>
+                        <select class="form-control" id="satisfaction_level">
+                            <option disabled="" selected="" value="0">-- Choose an Option --</option>
+                            <option value="0.3">30% - Very Good</option>
+                            <option value="0.2">20% - Good</option>
+                            <option value="0.15">15% - Average</option>
+                            <option value="0.1">10% - Bad</option>
+                            <option value="0.05">5% - Shocked</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">How many people are sharing the bill?</label>
+                        <input type="number" min="0" class="form-control" id="how_many_people" aria-describedby="emailHelp" placeholder="enter how many">
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="return location.reload();">Reset</button>
+                    <button type="button" class="btn btn-primary" onclick="calculate();">Calculate</button>
+                </form>
+                <br>
+                <!-- show result -->
+                <div class="alert alert-success" style="display:none" id="result" role="alert">
+                </div>
+            </div>
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+    <!-- my js script -->
+    <script>
+    function calculate(){
+        // get value
+        var bill_amount = document.getElementById('bill_amount').value;
+        var satisfaction_level = document.getElementById('satisfaction_level').value;
+        var how_many_people = document.getElementById('how_many_people').value;
+
+        // checking empty value
+        if (bill_amount === "" || bill_amount == 0) {
+            alert("Please enter your bill!");
+            return;
+        }
+        if (satisfaction_level === "" || satisfaction_level == 0) {
+            alert("Please select how was your service!");
+            return;
+        }
+        if (how_many_people === "" || how_many_people == 0) {
+            alert("Please enter how many people are sharing the bill!");
+            return;
+        }
+        // calculate those value
+        var total = Math.round((bill_amount * satisfaction_level) / how_many_people);
+        // show on place
+        document.getElementById("result").style.display = "block";
+        document.getElementById("result").innerHTML = "Tip amount is " + total + ".00 each person";
+    }
+    </script>
+</body>
+</html>
